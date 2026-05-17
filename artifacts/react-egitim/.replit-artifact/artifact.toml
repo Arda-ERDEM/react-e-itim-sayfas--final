@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ReactHub - React Eğitim Sitesi"
+version = "1.0.0"
+id = "artifacts/react-egitim"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23790
+
+[services.development]
+run = "pnpm --filter @workspace/react-egitim run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/react-egitim", "run", "build" ]
+publicDir = "artifacts/react-egitim/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23790"
+BASE_PATH = "/"
